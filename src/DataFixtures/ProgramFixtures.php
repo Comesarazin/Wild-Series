@@ -17,6 +17,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setCountry('U.S.A.');
         $program->setYear(2010);
         $program->setCategory($this->getReference('category_Horreur'));
+        $this->addReference('program_Walking_dead', $program);
         $manager->persist($program);
         
         $program = new Program();
@@ -25,6 +26,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setCountry('Grande-Bretagne');
         $program->setYear(2010);
         $program->setCategory($this->getReference('category_Aventure'));
+        $this->addReference('program_Sherlock', $program);
         $manager->persist($program);
 
         $program = new Program();
@@ -43,6 +45,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setCountry('U.S.A.');
         $program->setYear(2017);
         $program->setCategory($this->getReference('category_Action'));
+        $this->addReference('program_The_Punisher', $program);
         $manager->persist($program);
 
         $program = new Program();
@@ -51,6 +54,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setCountry('U.S.A.');
         $program->setYear(2016);
         $program->setCategory($this->getReference('category_Fantastique'));
+        $this->addReference('program_Stranger_Things', $program);
         $manager->persist($program);
 
         $manager->flush();

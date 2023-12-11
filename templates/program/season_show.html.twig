@@ -11,7 +11,7 @@
     <h2>Épisodes de la saison :</h2>
     <ul>
         {% for episode in season.episodes %}
-            <li>{{ episode.number}} : {{ episode.title }} 
+            <li>Épisode {{ episode.number}} : {{ episode.title }} 
             <p> {{ episode.synopsis }} </p> </li>
         {% endfor %}
     </ul>
