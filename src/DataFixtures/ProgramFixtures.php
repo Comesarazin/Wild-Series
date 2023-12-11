@@ -14,30 +14,42 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program = new Program();
         $program->setTitle('Walking dead');
         $program->setSynopsis('Des zombies envahissent la terre');
+        $program->setCountry('U.S.A.');
+        $program->setYear(2010);
         $program->setCategory($this->getReference('category_Horreur'));
         $manager->persist($program);
         
         $program = new Program();
-        $program->setTitle('Indiana Jones et le Cadran de la destinée');
-        $program->setSynopsis('le fameux cadran d Archimède, une relique qui aurait le pouvoir de localiser les fissures temporelles');
+        $program->setTitle('Sherlock');
+        $program->setSynopsis('Dans cette nouvelle adaptation des fameuses intrigues d Arthur Conan Doyle, l excentrique détective recherche des indices dans les rues de Londres.');
+        $program->setCountry('Grande-Bretagne');
+        $program->setYear(2010);
         $program->setCategory($this->getReference('category_Aventure'));
         $manager->persist($program);
 
         $program = new Program();
-        $program->setTitle('Dragons');
-        $program->setSynopsis('Hiccup est un adolescent viking de l île de Berk, où se battre avec des dragons est un mode de vie');
+        $program->setTitle('Arcane');
+        $program->setSynopsis('Au milieu du conflit entre les villes jumelles de Piltover et Zaun, deux soeurs se battent dans les camps opposés d une guerre entre technologies magiques et convictions incompatibles');
+        $program->setCountry('U.S.A.');
+        $program->setYear(2021);
         $program->setCategory($this->getReference('category_Animation'));
+        $this->addReference('program_Arcane', $program);
+
         $manager->persist($program);
 
         $program = new Program();
-        $program->setTitle('Mission impossible : Dead Reckoning');
-        $program->setSynopsis('Ethan Hunt et l équipe du FMI doivent traquer une nouvelle arme terrifiante qui menace toute l humanité si elle tombe entre de mauvaises mains');
+        $program->setTitle('The Punisher');
+        $program->setSynopsis('Après le massacre de toute sa famille, un ex-agent d élite du FBI, que l on disait mort dans le carnage, se lance dans une impitoyable vendetta. Seule la mort de ses ennemis pourra l arrêter.');
+        $program->setCountry('U.S.A.');
+        $program->setYear(2017);
         $program->setCategory($this->getReference('category_Action'));
         $manager->persist($program);
 
         $program = new Program();
-        $program->setTitle('Shang-Chi et la Légende des Dix Anneaux');
-        $program->setSynopsis('Shang-Chi est le fils du chef d une puissante organisation criminelle.');
+        $program->setTitle('Stranger Things');
+        $program->setSynopsis('1983, à Hawkins dans l Indiana. Après la disparition d un garçon de 12 ans dans des circonstances mystérieuses, la petite ville du Midwest est témoin d étranges phénomènes.');
+        $program->setCountry('U.S.A.');
+        $program->setYear(2016);
         $program->setCategory($this->getReference('category_Fantastique'));
         $manager->persist($program);
 
