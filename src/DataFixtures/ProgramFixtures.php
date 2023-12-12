@@ -17,7 +17,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setCountry('U.S.A.');
         $program->setYear(2010);
         $program->setCategory($this->getReference('category_Horreur'));
-        $this->addReference('program_Walking_dead', $program);
+        $this->addReference('program_1', $program);
         $manager->persist($program);
         
         $program = new Program();
@@ -26,7 +26,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setCountry('Grande-Bretagne');
         $program->setYear(2010);
         $program->setCategory($this->getReference('category_Aventure'));
-        $this->addReference('program_Sherlock', $program);
+        $this->addReference('program_2', $program);
         $manager->persist($program);
 
         $program = new Program();
@@ -35,7 +35,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setCountry('U.S.A.');
         $program->setYear(2021);
         $program->setCategory($this->getReference('category_Animation'));
-        $this->addReference('program_Arcane', $program);
+        $this->addReference('program_3', $program);
 
         $manager->persist($program);
 
@@ -45,7 +45,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setCountry('U.S.A.');
         $program->setYear(2017);
         $program->setCategory($this->getReference('category_Action'));
-        $this->addReference('program_The_Punisher', $program);
+        $this->addReference('program_4', $program);
         $manager->persist($program);
 
         $program = new Program();
@@ -54,7 +54,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setCountry('U.S.A.');
         $program->setYear(2016);
         $program->setCategory($this->getReference('category_Fantastique'));
-        $this->addReference('program_Stranger_Things', $program);
+        $this->addReference('program_5', $program);
         $manager->persist($program);
 
         $manager->flush();

@@ -14,7 +14,26 @@ class SeasonFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create('fr_FR');
 
-        for($i = 1; $i < 6; $i++) {
+        /* $mesProgram = ['program_Arcane', 'program_Walking_dead', 'program_Sherlock', 'program_The_Punisher', 'program_Stranger_Things']; */
+
+
+        for ($programNumber = 1; $programNumber <= 5; $programNumber++) {
+            for ($seasonNumber = 1; $seasonNumber <= 5; $seasonNumber++) {
+                $season = new Season();
+                $season->setNumber($seasonNumber);
+                $season->setYear($faker->year());
+                $season->setDescription($faker->paragraphs(3, true));
+
+                $season->setProgram($this->getReference('program_' . $programNumber ));
+
+                $this->addReference('program_' . $programNumber . 'season_' . $seasonNumber, $season);
+                $manager->persist($season);
+            }
+        }
+
+
+
+        /* for($i = 1; $i < 6; $i++) {
             $season = new Season();
             $season->setNumber($i);
             $season->setYear(2021+$i);
@@ -72,7 +91,7 @@ class SeasonFixtures extends Fixture implements DependentFixtureInterface
             $this->addReference('season'.$i.'_Stranger_Things', $season);
 
             $manager->persist($season);
-        }
+        } */
 /* 
         $season = new Season();
         $season->setNumber(1);

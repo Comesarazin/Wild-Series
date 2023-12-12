@@ -15,7 +15,20 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
 
         $faker = Factory::create('fr_FR');
 
-        for($i = 1; $i < 11; $i++) {
+        for($programNumber = 1; $programNumber <= 5; $programNumber++) {
+            for ($seasonNumber = 1; $seasonNumber <= 5; $seasonNumber++) {
+                for ($episodeNumber = 1; $episodeNumber <= 10; $episodeNumber++) {
+                    $episode = new Episode();
+                    $episode->setTitle($faker->sentence);
+                    $episode->setNumber($episodeNumber);
+                    $episode->setSynopsis($faker->paragraphs(3, true));
+                    $episode->setSeason($this->getReference('program_' . $programNumber . 'season_' . $seasonNumber));
+                    $manager->persist($episode);
+                }
+            }
+        }
+
+        /* for($i = 1; $i < 11; $i++) {
             $episode = new Episode();
             $episode->setTitle($faker->text(100));
             $episode->setNumber($i);
@@ -238,7 +251,7 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
             $episode->setSynopsis($faker->paragraphs(2, true));
             $episode->setSeason($this->getReference('season5_Stranger_Things'));
             $manager->persist($episode);
-        }
+        } */
 
 
         $manager->flush();
