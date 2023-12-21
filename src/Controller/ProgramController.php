@@ -57,7 +57,9 @@ class ProgramController extends AbstractController
 
     if ($form->isSubmitted() && $form->isValid()) {
         $entityManager->persist($program);
-        $entityManager->flush();            
+        $entityManager->flush();   
+        
+        $this->addFlash('success', 'La série a bien été ajouter ');
 
         // Redirect to categories list
         return $this->redirectToRoute('program_index');
