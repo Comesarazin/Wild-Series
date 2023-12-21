@@ -14,12 +14,22 @@ use App\Entity\Episode;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\ProgramType;
+use App\Repository\CategoryRepository;
 
 
 
 #[Route('/program', name: 'program_')]
 class ProgramController extends AbstractController
 {
+
+/*     private array $categorys;
+
+    public function __construct(private CategoryRepository $categoryRepository) 
+    {
+        $this->categorys = $this->categoryRepository->findAll();
+        $this->container->get('twig')->addGlobal('categorys', $this->categorys);
+    } */
+
     #[Route('/', name: 'index')]
     public function index(ProgramRepository $programRepository): Response
     {

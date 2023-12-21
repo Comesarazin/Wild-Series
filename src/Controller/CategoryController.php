@@ -16,6 +16,14 @@ use Doctrine\ORM\EntityManagerInterface;
 #[Route('/category', name: 'category_')]
 class CategoryController extends AbstractController
 {
+    /* private array $categorys;
+
+    private function __construct(private CategoryRepository $categoryRepository) 
+    {
+        $this->categorys = $this->categoryRepository->findAll();
+        $this->container->get('twig')->addGlobal('categorys', $this->categorys);
+    } */
+
     #[Route('/', name: 'index')]
     public function index(CategoryRepository $categoryRepository) : Response
     {
