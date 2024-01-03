@@ -1,0 +1,17 @@
+{# templates/actor/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ actor.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ actor.name }}</h1>
+
+    <strong>Séries associées à cet acteur :</strong>
+    <ul>
+        {% for program in actor.programs %}
+            <li>{{ program.title }}</li>
+        {% else %}
+            <li>Aucune série associée à cet acteur</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

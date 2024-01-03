@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Actor;
 
 class ProgramType extends AbstractType
 {
@@ -22,8 +23,13 @@ class ProgramType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => \App\Entity\Category::class,
                 'choice_label' => 'name', // Utilisez la propriété 'name' de Category comme label
-            ])
-        ;
+            ]);
+            $builder->add('actors', EntityType::class, [
+                'class' => Actor::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+            ]);
     }
 
 

@@ -11,6 +11,14 @@
             <p>Catégorie : {{ program.category.name }}</p>
             <p>Pays : {{ program.country }}</p>
             <p>Année de sortie : {{ program.year }}</p>
+            <strong>Acteurs :</strong>
+            <ul>
+                {% for actor in program.actors %}
+                    <li>{{ actor.name }}</li>
+                {% else %}
+                    <li>Aucun acteur pour cette série</li>
+                {% endfor %}
+            </ul>
             <p>Saison :</p>
             <ul>
                 {% for season in program.seasons %}
