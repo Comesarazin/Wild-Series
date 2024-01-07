@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use App\Repository\ProgramRepository;
@@ -17,6 +18,7 @@ use App\Form\ProgramType;
 use App\Repository\CategoryRepository;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Service\ProgramDuration;
+use Symfony\Component\Mime\Email;
 
 
 
@@ -52,7 +54,7 @@ class ProgramController extends AbstractController
     }
 
     #[Route('/new', name: 'new')]
-    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger, MailerInterface $mailer, ProgramRepository $programRepository): Response
     {
         $program = new Program();
         $form = $this->createForm(ProgramType::class, $program);
@@ -64,7 +66,16 @@ class ProgramController extends AbstractController
         $program->setSlug($slug);
 
         $entityManager->persist($program);
-        $entityManager->flush();   
+        $entityManager->flush();
+
+
+        $email = (new Email())
+            ->from($this->getParameter('mailer_from'))
+            ->to('sasacoco@orange.fr')
+            ->subject('Une nouvelle série vient d\'être publiée !')
+            ->html($this->renderView('Program/newProgramEmail.html.twig', ['program' => $program]));
+
+        $mailer->send($email);
         
         $this->addFlash('success', 'La série a bien été ajouter ');
 
