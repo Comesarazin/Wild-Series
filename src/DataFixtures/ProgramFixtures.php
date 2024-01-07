@@ -6,9 +6,17 @@ use App\Entity\Program;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
+    private SluggerInterface $slugger;
+
+    // Injectez l'interface SluggerInterface dans le constructeur
+    public function __construct(SluggerInterface $slugger)
+    {
+        $this->slugger = $slugger;
+    }
     public function load(ObjectManager $manager)
     {
         $program = new Program();
@@ -18,6 +26,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setYear(2010);
         $program->setCategory($this->getReference('category_Horreur'));
         $this->addReference('program_1', $program);
+        $slug = $this->slugger->slug($program->getTitle());
+        $program->setSlug($slug);
         $manager->persist($program);
         
         $program = new Program();
@@ -27,6 +37,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setYear(2010);
         $program->setCategory($this->getReference('category_Aventure'));
         $this->addReference('program_2', $program);
+        $slug = $this->slugger->slug($program->getTitle());
+        $program->setSlug($slug);
         $manager->persist($program);
 
         $program = new Program();
@@ -36,7 +48,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setYear(2021);
         $program->setCategory($this->getReference('category_Animation'));
         $this->addReference('program_3', $program);
-
+        $slug = $this->slugger->slug($program->getTitle());
+        $program->setSlug($slug);
         $manager->persist($program);
 
         $program = new Program();
@@ -46,6 +59,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setYear(2017);
         $program->setCategory($this->getReference('category_Action'));
         $this->addReference('program_4', $program);
+        $slug = $this->slugger->slug($program->getTitle());
+        $program->setSlug($slug);
         $manager->persist($program);
 
         $program = new Program();
@@ -55,6 +70,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setYear(2016);
         $program->setCategory($this->getReference('category_Fantastique'));
         $this->addReference('program_5', $program);
+        $slug = $this->slugger->slug($program->getTitle());
+        $program->setSlug($slug);
         $manager->persist($program);
 
         $manager->flush();

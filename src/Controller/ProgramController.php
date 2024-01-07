@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\ProgramType;
 use App\Repository\CategoryRepository;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use App\Service\ProgramDuration;
 
 
 
@@ -40,22 +42,27 @@ class ProgramController extends AbstractController
          ]);
     }
 
-    #[Route('/show/{id}', name: 'show')]
-    public function show(Program $program): Response
+    #[Route('/show/{slug}', name: 'show')]
+    public function show(Program $program, ProgramDuration $programDuration): Response
     {
         return $this->render('program/show.html.twig', [
             'program' => $program,
+            'programDuration' => $programDuration->calculate($program)
         ]);
     }
 
     #[Route('/new', name: 'new')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $program = new Program();
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
+
+        $slug = $slugger->slug($program->getTitle());
+        $program->setSlug($slug);
+
         $entityManager->persist($program);
         $entityManager->flush();   
         
